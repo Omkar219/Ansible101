@@ -1,18 +1,26 @@
 ### doesn't work as shell command.
+```
 ansible multi -b -a "tail /var/log/messages"
+```
 ### other way around 
 ## shows how many anisble commands have been run on each server
+```
 ansible multi -b -m shell -a "tail /var/log/messages | grep ansible-command | wc -l"
+```
 ### cron
+```
 ansible multi -b -m cron -a "name='daily-cron-all-servers' hour=4 job='/path/to/daily-script.sh'"
 ansible multi -b -m cron -a "name='daily-cron-all-servers' state=absent"
+```
 ### GIT
+```
 ansible app -b -m package -a "name=git state=present" ##if u get unknown host_key , add this accept_hostkey=yes
 ansible app -b -m git -a "repo=git://example.com/path/to/repo.git dest=/opt/myapp update=yes version=1.2.4"
 ansible app -b -a "/opt/myapp/update.sh"
-
+```
 ##### Ansible play books 
 ### touch playbok.yml
+```
 ---
  - hosts: all
 
@@ -27,10 +35,11 @@ ansible app -b -a "/opt/myapp/update.sh"
  - name: Start Apache and configure it to run at boot.
    command: service httpd start
  - command: chkconfig httpd on
- 
+ ```
  #### run ansible-playbook playbook.yml
  
  #### other way around 
+ ```
  ---
  - hosts: all
    become: yes
@@ -61,15 +70,18 @@ ansible app -b -a "/opt/myapp/update.sh"
         name: httpd
        state: started
         enabled: yes
+```
 ###  limiting 
+```
 ansible-playbook playbook.yml --limit webservers
 ansible-playbook playbook.yml --list-hosts
 ansible-playbook playbook.yml --become --become-user=janedoe --ask-become-pass
 ansible-playbook playbook.yml --user=johndoe
 ##-i inventory path , --verbose or -vvvv, --extra-vars=VARS  , key=value format
 ##--check to check , --connection=TYPE , -c tye of conecction = ssh , 
-
+```
 #### installing npm 
+```
 ---
  - hosts: all
    become: yes
@@ -117,11 +129,11 @@ ansible-playbook playbook.yml --user=johndoe
     - name: Start example Node.js app.
          command: "forever start {{ node_apps_location }}/app/app.js"
          when: "forever_list.stdout.find(node_apps_location + '/app/app.js') == -1"
-          
+```         
  ### ansible-playbook playbook.yml --extra-vars="node_apps_location=/usr/local/opt/node"
          
 #### LAMP SETUP , create to files named playbook.yml , vars.yml     
-         
+ ```        
 ---
  - hosts: all
    become: yes
@@ -292,13 +304,14 @@ ansible-playbook playbook.yml --user=johndoe
 			creates={{ drupal_core_path }}/sites/default/settings.php
          notify: restart apache
          become_user: www-data
-
+```
 	  
 ### INSIDE THE VARSFILLE vars.yml
+```
 drupal_site_name: "Drupal Test"
 drupal_core_version: 	  
 drupal_site_name:
 domain:	  
 ### Read fromm page number 86
 ###### Create new one 
-
+```
