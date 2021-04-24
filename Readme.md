@@ -1,3 +1,43 @@
+#### installing anisble 
+```
+apt-get install ansible 
+```
+#### important files to remember 
+```
+/etc/ansible/ansible.cfg ### for configuration of the ansible 
+/etc/ansible/hosts ### inventory of the files 
+```
+##### Cat /etc/ansible hosts with static and dynamic example 
+```
+[web]
+mastery.example.name
+172.2.2.1
+[dns]
+backend.example.name
+172.2.2.2
+[database]
+backend.example.name
+172.2.2.3
+
+[frontend:children]
+web
+[backend:children]
+dns
+database 
+```
+##### To see inventory using ansible 
+```
+ansible all --list-hosts
+ansible jenkins --list-hosts
+ansible ungrouped --list-hoststs
+ansible ungrouped --list-hosts
+```
+###### to check the vserion and to gather facts.
+```
+ansible localhost -m setup 
+ansible all -m setup 
+ansible -m setup localhost | grep ansible_python_version
+```
 ### doesn't work as shell command.
 ```
 ansible multi -b -a "tail /var/log/messages"
