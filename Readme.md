@@ -1,6 +1,8 @@
 #### installing anisble 
 ```
 apt-get install ansible 
+**https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/**
+**https://myadventuresincoding.wordpress.com/2011/12/22/linux-how-to-ssh-between-two-linux-computers-without-needing-a-password/**
 ```
 #### important files to remember 
 ```
